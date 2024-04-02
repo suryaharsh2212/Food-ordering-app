@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import validator from 'validator';
+import { parsePhoneNumberFromString } from "libphonenumber-js"
 
 const Register = () => {
-    const [message,setmessage]=useState("")
-    const [otp, setOTP] = useState() 
-    const [alert ,setAlert]=useState(false)
+    const [message, setmessage] = useState("")
+    const [otp, setOTP] = useState()
+    const [alert, setAlert] = useState(false)
     const [check, setcheck] = useState(false)
     const navigate = useNavigate();
 
@@ -17,7 +19,7 @@ const Register = () => {
         lastName: "",
         password: "",
     });
-    
+
 
     const handleSignup = async () => {
         try {
@@ -32,48 +34,72 @@ const Register = () => {
             });
             const data = await response.json();
             console.log(data)
-            if(data.hasError)
-            {
-                setAlert(true)
-                setmessage(data.message)
-            }
-            else{
-                genotp(user.email)
 
-            }
-            
+
         } catch (error) {
             console.log(error);
         }
     };
+    function validatePhoneno() {
+        const phoneNumber = '91' + user.phoneNo;
 
-    const genotp = async (email) => {
         try {
-            const otpres = await fetch('http://localhost:8000/otp/send', {
-                method: 'POST',
-                credentials: 'include',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email }),
-            });
-            const otpData = await otpres.json();
-            console.log(otpData);
-            if(otpData.hasError)
-            {
-                setAlert(true)
-                setmessage(otpData.message)
+            const parsedPhoneNumber = parsePhoneNumberFromString(phoneNumber, 'IN');
+            if (parsedPhoneNumber && parsedPhoneNumber.isValid()) {
+                console.log('Valid Indian phone number');
+                return true
+            } else {
+                console.log('Invalid Indian phone number');
+                return false
             }
-            else{
-                setcheck(true)
-            }
-
-            
         } catch (error) {
-            console.log(error);
+            console.error('Error parsing phone number:', error);
         }
-    };
-   
+    }
+
+    const genotp = async() => {
+
+        if (user.firstName == "" || user.lastName == "") {
+            setAlert(true)
+            setmessage("Please enter your name and required fields")
+        }
+        else if (!validator.isEmail(user.email)) {
+            setAlert(true)
+            setmessage("Email provided is not valid")
+        }
+        else if (!validatePhoneno()) {
+            setAlert(true)
+            setmessage("Phone number is not valid")
+        }
+        else if (user.password.length < 8) {
+            setAlert(true)
+            setmessage("Password length must be altleast 8 characters")
+        }
+        else {
+            const email=user.email
+            try {
+                const otpres = await fetch('http://localhost:8000/otp/send', {
+                    method: 'POST',
+                    credentials: 'include',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({email}),
+                });
+                const otpData = await otpres.json();
+                console.log(otpData);
+                if (otpData.hasError) {
+                    setAlert(true)
+                    setmessage(otpData.message)
+                }
+                else {
+                    setcheck(true)
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    }
     const email = user.email
     const validateotp = async () => {
         try {
@@ -87,35 +113,36 @@ const Register = () => {
             });
             const otpData = await otpres.json();
             console.log(otpData);
-            if(otpData.hasError)
-            {
+            if (otpData.hasError) {
                 setAlert(true)
                 setmessage(otpData.message)
             }
-            else{
+            else {
+                await handleSignup()
                 navigate("/user/content")
             }
+
         } catch (error) {
             console.log(error);
         }
     };
-    
+
 
 
 
 
     return (
         <div>
-            {alert?
-             <div role="alert" className="alert alert-error absolute top-28 left-1/2 transform -translate-x-1/2 z-50">
-            
-             <span>{message}</span>
-             <button onClick={()=>{setAlert(false)}} className='flex justify-end'>
-             <img className='h-10 w-10' src="https://cdn-icons-png.flaticon.com/128/2734/2734822.png" alt="" />
-             </button> 
-           </div>
-            :
-            <></>
+            {alert ?
+                <div role="alert" className="alert alert-error absolute top-24 left-1/2 transform -translate-x-1/2 ">
+
+                    <span>{message}</span>
+                    <button onClick={() => { setAlert(false) }} className='flex justify-end'>
+                        <img className='h-10 w-10 animate-pulse' src="https://cdn-icons-png.flaticon.com/128/2734/2734822.png" alt="" />
+                    </button>
+                </div>
+                :
+                <></>
             }
 
             {check ?
@@ -150,7 +177,7 @@ const Register = () => {
                                                 <div className="flex flex-row items-center justify-center text-center text-sm font-medium space-x-1 text-gray-500">
                                                     <p>Didn't receive code?</p>
                                                     {/* <button className="flex flex-row items-center text-blue-600" onClick={genotp(user.email)} rel="noopener noreferrer">Resend</button>  */}
-                                                    <button className="flex flex-row items-center text-blue-600" onClick={() => genotp(user.email)} rel="noopener noreferrer">Resend</button>
+                                                    <button className="flex flex-row items-center text-blue-600" onClick={() => genotp()} rel="noopener noreferrer">Resend</button>
 
                                                 </div>
                                             </div>
@@ -163,12 +190,12 @@ const Register = () => {
                 </div>
                 :
 
-                <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
+                <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 '>
                     <div className=' md:mt-36'>
                         <img src="https://img.freepik.com/premium-vector/illustration-vector-graphic-cartoon-character-online-registration_516790-1807.jpg?size=626&ext=jpg&ga=GA1.1.1500486508.1710956728&semt=ais " alt="" />
                     </div>
                     <div>
-                        <div className='flex flex-col justify-start items-start gap-6 p-10  rounded-lg md:mt-36'>
+                        <div className='flex flex-col justify-start items-start gap-6 p-10 shadow-2xl md:screen rounded-lg md:mt-36'>
                             <h1 className='  font-bold'>Please Register your Account !</h1>
                             <span className='flex w-4/5'>
                                 <input
@@ -220,10 +247,11 @@ const Register = () => {
                                 onChange={(e) => setUser({ ...user, password: e.target.value })}
                             />
                             <Link className=' font-light' to="/user/login">Already a User ? Login</Link>
+                            <div className='flex justify-center md:justify-start w-full '>
+                            <button className='btn w-1/3 ml-10 bg-blue-600 text-white' onClick={() => genotp()}>Signup</button>
                         </div>
-                        <div className='flex justify-center md:justify-start w-full '>
-                            <button className='btn w-1/3 ml-10 bg-blue-600 text-white' onClick={handleSignup}>Signup</button>
                         </div>
+                      
                     </div>
                 </div>}
 

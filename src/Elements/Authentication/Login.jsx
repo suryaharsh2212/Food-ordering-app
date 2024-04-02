@@ -62,7 +62,7 @@ function Login() {
                     <img className='' src="https://tecdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp" alt="" />
                 </div>
 
-                <div className=' flex justify-center items-center flex-col gap-5   rounded mb-10 md:mt-32' >
+                <div className=' flex justify-center items-center flex-col gap-5 shadow-xl  rounded mb-10 md:mt-28' >
                     <img className='' src="https://cdn-icons-png.flaticon.com/128/3293/3293466.png" alt="" /> 
                     <h1 className=' font-bold'>Login to your Account</h1>
                     

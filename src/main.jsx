@@ -11,6 +11,7 @@ import Otpgenerate from './Elements/OTP/Otpgenerate.jsx'
 import Content from './Elements/Content/Content.jsx'
 import ForgotPassword from './Elements/Authentication/ForgotPassword.jsx'
 import Userforgotpassword from './Elements/Authentication/Userforgotpassword.jsx'
+import Userprofile from './Elements/Header/Userprofile.jsx'
 
 
 
@@ -25,7 +26,8 @@ const router=createBrowserRouter(
       <Route path='/' element={<Home/>}/>
       <Route path='/user/content' element={<Content/>}/>
       <Route path='/request/forgot-password' element={<ForgotPassword/>}/>
-      <Route path='/user/forgot-password' element={<Userforgotpassword/>}/>
+      <Route path='/password/forgot-password' element={<Userforgotpassword/>}/>
+      <Route path='/user/profile' element={<Userprofile/>}/>
       
     </Route>
   )

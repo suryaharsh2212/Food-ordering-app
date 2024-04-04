@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 function Navbar() {
   const navigate=useNavigate()
+  const [alert,setAlert]=useState(false)
   const logout=async()=>{
+    
     try {
         const response = await fetch('http://localhost:8000/user/logout', {
             method: 'POST',
@@ -15,6 +17,7 @@ function Navbar() {
         response.json().then((res)=>{
 
             if (res.hasError) {
+                setAlert(true)
                 console.log(res.message );
             }else{
                 navigate("/")
@@ -27,10 +30,24 @@ function Navbar() {
        console.log(error); 
     }
 }
+const handleprofile=async()=>{
+
+}
 
 
   return (
     <nav>
+      {alert?
+             <div role="alert" className="alert alert-error flex flex-row w-screen absolute top-14 md:top-28 left-1/2 transform -translate-x-1/2 z-50">
+            
+             <span>LOgin first</span>
+            <button onClick={()=>{setAlert(false)}} className='flex justify-end'>
+             <img className='h-10 w-10' src="https://cdn-icons-png.flaticon.com/128/2734/2734822.png" alt="" />
+             </button> 
+           </div>
+            :
+            <></>
+            }
       <div className="navbar bg-base-100 fixed top-0 z-50" style={{ background: "whitesmoke" }} >
         <div className="navbar-start">
           <div className="dropdown">
@@ -54,10 +71,10 @@ function Navbar() {
         </div>
         <div className="navbar-end">
           <div>
-            <details className="dropdown">
-              <summary className="m-1 btn"><img className='h-10 w-10 mr-3 dropdown' src="https://cdn-icons-png.flaticon.com/128/1144/1144760.png" alt="" /></summary>
+          <details className="dropdown">
+              <summary className=" mr-4 hover:bg-slate-200 btn outline-white"><img className='h-10 w-10' src="https://cdn-icons-png.flaticon.com/128/1144/1144760.png" alt="" /></summary>
               <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-44">
-                <li><button>Profile</button></li>
+                <li><Link to="/user/profile"><button onClick={handleprofile}>Profile</button></Link></li>
                 <li><button onClick={logout}>Logout</button></li>
               </ul>
             </details>

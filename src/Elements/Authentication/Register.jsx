@@ -8,6 +8,7 @@ const Register = () => {
     const [otp, setOTP] = useState()
     const [alert, setAlert] = useState(false)
     const [check, setcheck] = useState(false)
+    const [spin,setspin]=useState(false)
     const navigate = useNavigate();
 
 
@@ -58,6 +59,7 @@ const Register = () => {
     }
 
     const genotp = async() => {
+       
 
         if (user.firstName == "" || user.lastName == "") {
             setAlert(true)
@@ -76,6 +78,7 @@ const Register = () => {
             setmessage("Password length must be altleast 8 characters")
         }
         else {
+            setspin(true)
             const email=user.email
             try {
                 const otpres = await fetch('http://localhost:8000/otp/send', {
@@ -90,9 +93,11 @@ const Register = () => {
                 console.log(otpData);
                 if (otpData.hasError) {
                     setAlert(true)
+                    setspin(false)
                     setmessage(otpData.message)
                 }
                 else {
+                    setspin(false)
                     setcheck(true)
                 }
             } catch (error) {
@@ -195,7 +200,7 @@ const Register = () => {
                         <img src="https://img.freepik.com/premium-vector/illustration-vector-graphic-cartoon-character-online-registration_516790-1807.jpg?size=626&ext=jpg&ga=GA1.1.1500486508.1710956728&semt=ais " alt="" />
                     </div>
                     <div>
-                        <div className='flex flex-col justify-start items-start gap-6 p-10 shadow-2xl md:screen rounded-lg md:mt-36'>
+                        <div className='flex flex-col justify-start items-start gap-6 p-10  md:screen rounded-lg md:mt-36'>
                             <h1 className='  font-bold'>Please Register your Account !</h1>
                             <span className='flex w-4/5'>
                                 <input
@@ -248,7 +253,7 @@ const Register = () => {
                             />
                             <Link className=' font-light' to="/user/login">Already a User ? Login</Link>
                             <div className='flex justify-center md:justify-start w-full '>
-                            <button className='btn w-1/3 ml-10 bg-blue-600 text-white' onClick={() => genotp()}>Signup</button>
+                            <button className='btn w-1/3 ml-10 bg-blue-600 text-white' onClick={() => genotp()}>{spin?<><span className="loading loading-dots loading-md"></span></>:<>Signup</>}</button>
                         </div>
                         </div>
                       

@@ -1,6 +1,7 @@
 import React from 'react'
 import Login from '../Elements/Authentication/Login'
 import { Link } from 'react-router-dom'
+import Carousel from './Carousel'
 
 
 function Home() {
@@ -47,6 +48,9 @@ function Home() {
                         <button className="btn btn-primary">Get Started</button>
                     </div>
                 </div>
+            </div>
+            <div>
+                <Carousel/>
             </div>
         </div>
     )

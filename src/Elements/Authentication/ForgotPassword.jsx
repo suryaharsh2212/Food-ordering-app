@@ -17,6 +17,10 @@ const forgot=async()=>{
         });
         response.json().then((res)=>{
             console.log(res);
+            if(res.hasError)
+            {
+              setAlert(true)
+            }
              
            
         }).catch((err)=>{
@@ -26,6 +30,7 @@ const forgot=async()=>{
        console.log(error); 
     }
 }
+
 
 
  
@@ -44,9 +49,13 @@ const forgot=async()=>{
             :
             <></>
             }
-      <div className='h-screen w-screen bg-white flex justify-center items-center'>
-        <input type="email" value={email} onChange={(e)=>{setEmail(e.target.value)}} name="" id="" />
-         <button className='btn btn-outline'>Request</button>
+      <div className='h-screen w-full bg-white flex justify-center items-center p-5'>
+       
+        <div className='flex flex-col md:w-1/3 w-full shadow-2xl p-5 md:p-20'>
+        <h1 className=' font-roboto font-bold mb-5 -mt-10'>Provide your Registered Email</h1>
+        <input type="email" placeholder='Your email' className='px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500' value={email} onChange={(e)=>{setEmail(e.target.value)}} name="" id="" />
+         <button onClick={()=>forgot()} className='btn btn-primary mt-10'>Request</button>
+      </div>
       </div>
     </div>
   )

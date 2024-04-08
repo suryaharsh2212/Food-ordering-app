@@ -60,7 +60,7 @@ const handleprofile=async()=>{
               <li className='p-2'><Link className=' text-xs font-extrabold' to="/user/login">Login</Link></li>
             </ul>
           </div>
-          <a className="btn btn-ghost text-3xl"><span className=' font-extrabold text-blue-700' >JUST</span><span className=' font-extrabold' >EAT</span></a>
+          <a className="btn btn-ghost text-3xl"><span className=' font-extrabold text-orange-700' >JUST</span><span className=' font-extrabold' >EAT</span></a>
         </div>
         <div className="navbar-end p-3 mr-3 hidden lg:flex">
           <ul className="menu menu-horizontal px-1">

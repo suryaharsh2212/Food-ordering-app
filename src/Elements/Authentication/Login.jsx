@@ -59,11 +59,12 @@ function Login() {
             <div className='grid grid-cols-1 sm:grid-cols-2  gap-4 '>
 
                 <div className=' border-red-950  md:mt-32'>
-                    <img className='' src="https://tecdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp" alt="" />
+                    {/* <img className='' src="https://tecdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp" alt="" />  */}
+                    <img src="https://i.ibb.co/64KmD1F/undraw-Access-account-re-8spm.png" alt="" />
                 </div>
 
-                <div className=' flex justify-center items-center flex-col gap-5   rounded mb-10 md:mt-28' >
-                    <img className='' src="https://cdn-icons-png.flaticon.com/128/3293/3293466.png" alt="" /> 
+                <div className=' flex justify-center items-center flex-col gap-5   rounded mb-10 md:mt-28 shadow-lg' >
+                    {/* <img className=' ' src="https://cdn-icons-png.flaticon.com/128/3293/3293466.png" alt="" />  */} 
                     <h1 className=' font-bold'>Login to your Account</h1>
                     
                     <label className="input input-bordered flex items-center gap-2">
@@ -75,7 +76,7 @@ function Login() {
                         <input  type="password" className="grow w-72"  placeholder='password' value={password} onChange={(e)=>{setPassword(e.target.value)}} />
                     </label>
                     <div className='w-1/2 flex justify-center' >
-                        <button type='submit'onClick={LoginRequest} className='btn bg-sky-400 w-full md:w-3/4'>Sign in</button>
+                        <button type='submit'onClick={LoginRequest} className='btn  w-full md:w-3/4' style={{background:"#FDA403"}}>Sign in</button>
                     </div>
                     <div>
                         <span><Link className=' text-blue-600 mr-5 text-xs' to="/user/register">Signup with us !</Link></span>

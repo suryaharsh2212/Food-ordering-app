@@ -195,7 +195,7 @@ const Register = () => {
                 </div>
                 :
 
-                <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 '>
+                <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 bg-slate-50'>
                     <div className=' md:mt-36'>
                         <img src="https://img.freepik.com/premium-vector/illustration-vector-graphic-cartoon-character-online-registration_516790-1807.jpg?size=626&ext=jpg&ga=GA1.1.1500486508.1710956728&semt=ais " alt="" />
                     </div>

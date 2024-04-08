@@ -22,11 +22,23 @@ function Content() {
           <ProductCard />
           <ProductCard />
           <ProductCard />
+
+
+          <ProductCard />
           <ProductCard />
           <ProductCard />
           <ProductCard />
         </div>
       </div >
+      <div className="flex justify-center items-center h-full w-screen">
+  <div className="">
+    <div className="join grid grid-cols-2">
+      <button className="join-item btn btn-outline">Previous page</button>
+      <button className="join-item btn btn-outline">Next</button>
+    </div>
+  </div>
+</div>
+
 
 
     </div >

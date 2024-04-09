@@ -1,39 +1,11 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import Account from './Account'
 function Navbar() {
   const navigate=useNavigate()
   const [alert,setAlert]=useState(false)
-  const logout=async()=>{
-    
-    try {
-        const response = await fetch('http://localhost:8000/user/logout', {
-            method: 'POST',
-            credentials: 'include',
-            headers: {
-              'Content-Type': 'application/json',
-             
-            },
-        });
-        response.json().then((res)=>{
 
-            if (res.hasError) {
-                setAlert(true)
-                console.log(res.message );
-            }else{
-                navigate("/")
-            }
-           
-        }).catch((err)=>{
-            console.log(err);
-        })
-    } catch (error) {
-       console.log(error); 
-    }
-}
-const handleprofile=async()=>{
-    console.log("profile");
 
-}
 
 
   return (
@@ -49,7 +21,7 @@ const handleprofile=async()=>{
             :
             <></>
             }
-      <div className="navbar  fixed top-0 z-50 bg-slate-100" style={{ background:"" }} >
+      <div className="navbar  fixed top-0 z-50 bg-slate-100 border-b-2" style={{ background:"" }} >
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -72,16 +44,19 @@ const handleprofile=async()=>{
         </div>
         <div className="navbar-end">
           <div>
-          <details className="dropdown">
-              <summary className=" mr-4 hover:bg-slate-200 btn outline-white"><img className='h-10 w-10' src="https://cdn-icons-png.flaticon.com/128/1144/1144760.png" alt="" /></summary>
+          {/* <details className="dropdown">
+              <summary className=" mr-4 hover:bg-slate-200 btn outline-white"><img className='h-10 w-10' src="https://cdn-icons-png.flaticon.com/128/10307/10307911.png" alt="" /></summary>
               <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-44">
                 <li><Link to="/user/profile"><button onClick={handleprofile}>Profile</button></Link></li>
+                <li><Link to="/user/content"><button >Restaurants</button></Link></li>
                 <li><button onClick={logout}>Logout</button></li>
+                
               </ul>
-            </details>
+            </details> */}
+            <Account/>
 
           </div>
-          <Link to="/user/cart"> <img className='h-10 w-10 mr-3' src="https://cdn-icons-png.flaticon.com/128/1063/1063076.png" alt="" /></Link>
+          <Link to="/user/cart"> <img className='h-10 w-10 mr-3' src="https://cdn-icons-png.flaticon.com/128/4290/4290854.png" alt="" /></Link>
         </div>
       </div>
     </nav>

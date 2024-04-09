@@ -2,28 +2,14 @@ import { Link } from "react-router-dom"
 import ProductCard from "./ProductCard"
 import SearchBar from "./SearchBar"
 import { useEffect, useState } from "react"
-// {
-//   "hasError": false,
-//   "title": "Restaurants List",
-//   "data": {
-//     "remainingCount": 99,
-//     "dataList": [
-//       {
-//         "name": "Guendolen Benallack",
-//         "cusine": "Vietnamese",
-//         "price": 433.53,
-//         "rating": 3.2,
-//         "bannerURL": "https://images.pexels.com/photos/1237073/pexels-photo-1237073.jpeg"
-//       }
-//     ]
-//   },
-//   "message": "Restaurants listed successfully"
-// }
 
 function Content() {
   const [restro, setRestro] = useState([])
   const [pageNo, setpageNo] = useState(1)
-  const [pageSize, setPagesize] = useState(10)
+  const [pageSize, setPagesize] = useState(12)
+  const handleNextPage = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -47,15 +33,15 @@ function Content() {
     fetchData();
   }, [pageNo, pageSize]);
   return (
-    <div className="grid grid-cols-1 md:grid-cols-5 gap-4 md:mt-32" >
+    <div className="grid grid-cols-1 md:grid-cols-5 gap-1 mt-1 h-full " >
 
-      <div className="grid grid-rows-10 h-full md:col-span-5 px-20">
-        <div className="w-full  row-span-1 flex  ">
-          <div className="flex w-full justify-center items-center p-5">
+      <div className="grid grid-rows-10 h-full md:col-span-5 md:px-20  bg-slate-400" style={{background:"aliceblue"}}>
+        <div className="w-full h-5 row-span-1 flex  ">
+          <div className="flex h-20 w-full justify-center mt-24 items-start p-5">
             <SearchBar />
           </div>
         </div>
-        <div className="container mx-auto -mt-44 md:-mt-14  grid grid-cols-1 gap-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-3 row-span-9">
+        <div className="container mx-auto -mt-96 md:-mt-20 md:p-5  grid grid-cols-1 gap-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 row-span-9">
           {restro.map((item) => (
             <ProductCard
               key={item.name} // Don't forget to add a unique key
@@ -68,15 +54,14 @@ function Content() {
           ))}
 
         </div>
-      </div >
-      <div className="flex justify-center items-center h-full w-screen">
-        <div className="">
-          <div className="join grid grid-cols-2">
-            <button className="join-item btn btn-outline">Previous page</button>
-            <button className="join-item btn btn-outline">Next</button>
-          </div>
+        <div className="w-full h-20 p-20 flex justify-center items-center mt-24" style={{}}>
+        <button className="join-item rounded-r btn btn-outline" onClick={()=>{setpageNo(pageNo-1),handleNextPage()}}>Previous page</button>
+            <button className="join-item rounded-l btn btn-outline"onClick={()=>{setpageNo(pageNo+1),handleNextPage()}}>Next Page</button>
+
         </div>
-      </div>
+      </div >
+
+     
 
 
 

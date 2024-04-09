@@ -1,46 +1,72 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  Typography,
+  Button,
+  Tooltip,
+  IconButton,
+} from "@material-tailwind/react";
 
-// {
-//   "hasError": false,
-//   "title": "Restaurants List",
-//   "data": {
-//     "remainingCount": 99,
-//     "dataList": [
-//       {
-//         "name": "Guendolen Benallack",
-//         "cusine": "Vietnamese",
-//         "price": 433.53,
-//         "rating": 3.2,
-//         "bannerURL": "https://images.pexels.com/photos/1237073/pexels-photo-1237073.jpeg"
-//       }
-//     ]
-//   },
-//   "message": "Restaurants listed successfully"
-// }
+
 const ProductCard = ({ name, cusine, price, rating, image }) => {
   return (
-    <div className='mb-5 py-1 px-5'>
-      <div className="max-w-md mx-auto bg-white shadow-md rounded-xl overflow-hidden hover:shadow-lg transition duration-100 transform hover:scale-105">
-        <img className="h-56 w-full object-cover" src={image} alt="img" />
-        <div className="p-3">
-          <h2 className="text-xl font-semibold">{name}</h2>
-          <p className="text-gray-500 mb-4">{cusine}</p>
-          <div className="flex items-center">
-            <span className="text-gray-600 flex flex-row">
-              <span> {rating}</span>
-              
-              <span><img className='h-5 w-5' src="https://cdn-icons-png.flaticon.com/128/7656/7656139.png" alt="img" /></span>
-              
-            </span>
-          </div>
-          <div className="flex items-center">
-            <img className='h-5 w-5' src="https://cdn-icons-png.flaticon.com/128/9375/9375840.png" alt="" />
-            <span className="text-black font-bold text-xl">{price}</span>
-            <span><button className='btn w-36 btn-primary ml-24'>Explore</button></span>
+
+    <div className='relative top-24 md:top-36'>
+
+      <div className=' h-fit w-full p-2' >
+        <div className="card card-compact w-fit h-96 bg-aliceblue shadow-xl transition rounded-lg duration-200 transform hover:bg-white hover:scale-95 hover:rounded-2xl">
+          <figure className="h-1/2 overflow-hidden">
+            <img className="h-full w-full" src={image} alt="Shoes" />
+          </figure>
+          <div className="card-body h-1/2">
+            <h2 className="card-title">{name}</h2>
+            <p>If a dog chews shoes whose shoes does he choose?</p>
+            <div className="card-actions justify-end">
+              <button className="btn btn-outline w-full" onClick={() => document.getElementById('my_modal_3').showModal()}>Explore Menu</button>
+            </div>
           </div>
         </div>
+
       </div>
+
+
+
+
+      <dialog id="my_modal_3" className="modal w-screen ">
+        <div className="modal-box h-screen w-screen">
+          <form method="dialog">
+            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+          </form>
+          <div className="w-full overflow-x-auto">
+            <table className="table">
+              {/* head */}
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Name</th>
+                  <th>Price</th>
+                  <th>Add item</th>
+                </tr>
+              </thead>
+              <tbody>
+                {/* row 1 */}
+                <tr className="bg-base-200">
+                  <th>1</th>
+                  <td>chicken butter</td>
+                  <td>250.0</td>
+                  <td><button className='btn btn-info w-full'>Add+</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </dialog>
+
+
     </div>
   );
 };

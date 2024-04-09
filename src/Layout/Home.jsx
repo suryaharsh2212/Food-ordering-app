@@ -3,6 +3,7 @@ import Login from '../Elements/Authentication/Login'
 import { Link } from 'react-router-dom'
 import Carousel from './Carousel'
 import { Section } from './Section'
+import Hero from './Hero'
 
 
 
@@ -14,9 +15,12 @@ import { Section } from './Section'
 function Home() {
     return (
         <div className='md:p-5 md:mt-20 bg-white ' >
+             
             <Section/>
             <hr />
              <Carousel/>
+             <Hero/>
+      
            
           
             

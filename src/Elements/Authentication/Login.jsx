@@ -8,10 +8,11 @@ function Login() {
     const [email,setEmail]=useState('')
     const [message,setmessage]=useState('')
     const [alert,setAlert]=useState(false)
-  
+    const [spin,setSpin]=useState(true)
   
         const LoginRequest=async()=>{
             try {
+                setSpin(false)
                 const response = await fetch('http://localhost:8000/user/login', {
                     method: 'POST',
                     credentials: 'include',
@@ -26,12 +27,14 @@ function Login() {
                 
                     console.log(document.cookie);
                     if (res.hasError) {
+                        setSpin(true)
                         console.log(res.message );
                         setmessage(res.message)
 
                         setAlert(true)
                     }else{
                         navigate("/user/content")
+                        setSpin(false)
                     }
                    
                 }).catch((err)=>{
@@ -56,35 +59,82 @@ function Login() {
             :
             <></>
             }
-            <div className='grid grid-cols-1 sm:grid-cols-2  gap-4 '>
+             
+          
 
-                <div className=' border-red-950  md:mt-32'>
-                    {/* <img className='' src="https://tecdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp" alt="" />  */}
-                    <img src="https://i.ibb.co/64KmD1F/undraw-Access-account-re-8spm.png" alt="" />
-                </div>
 
-                <div className=' flex justify-center items-center flex-col gap-5   rounded mb-10 md:mt-28 shadow-lg' >
-                    {/* <img className=' ' src="https://cdn-icons-png.flaticon.com/128/3293/3293466.png" alt="" />  */} 
-                    <h1 className=' font-bold'>Login to your Account</h1>
-                    
-                    <label className="input input-bordered flex items-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-4 h-4 opacity-70"><path d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.51c.206.1.446.1.652 0l6.598-3.185A.755.755 0 0 1 15 5.293V4.5A1.5 1.5 0 0 0 13.5 3h-11Z" /><path d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" /></svg>
-                        <input  type="text" className="grow w-72" placeholder="Email" value={email} onChange={(e)=>setEmail(e.target.value)} />
-                    </label>
-                    <label className="input input-bordered flex items-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-4 h-4 opacity-70"><path fillRule="evenodd" d="M14 6a4 4 0 0 1-4.899 3.899l-1.955 1.955a.5.5 0 0 1-.353.146H5v1.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-2.293a.5.5 0 0 1 .146-.353l3.955-3.955A4 4 0 1 1 14 6Zm-4-2a.75.75 0 0 0 0 1.5.5.5 0 0 1 .5.5.75.75 0 0 0 1.5 0 2 2 0 0 0-2-2Z" clipRule="evenodd" /></svg>
-                        <input  type="password" className="grow w-72"  placeholder='password' value={password} onChange={(e)=>{setPassword(e.target.value)}} />
-                    </label>
-                    <div className='w-1/2 flex justify-center' >
-                        <button type='submit'onClick={LoginRequest} className='btn  w-full md:w-3/4' style={{background:"#FDA403"}}>Sign in</button>
-                    </div>
-                    <div>
-                        <span><Link className=' text-blue-600 mr-5 text-xs' to="/user/register">Signup with us !</Link></span>
-                        <span><Link className='text-blue-600   text-xs' to="/request/forgot-password">Forgot Your Password?</Link></span>
-                    </div>
-                    
-                </div>
+      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 ">
+        <div className="sm:mx-auto sm:w-full sm:max-w-sm ">
+        
+        </div>
+
+        <div className=" sm:mx-auto sm:w-full sm:max-w-sm shadow-lg p-10 md:mt-20 border border-slate-100 border-solid rounded mt-20 md:p-20">
+          <div className="space-y-6">
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
+                Email address
+              </label>
+              <div className="mt-2 ">
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  value={email}
+                  onChange={(e)=>setEmail(e.target.value)}
+                  autoComplete="email"
+                  required
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 px-3"
+                />
+              </div>
             </div>
+
+            <div>
+              <div className="flex items-center justify-between">
+                <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
+                  Password
+                </label>
+                <div className="text-sm">
+                  <Link to="/request/forgot-password" className="font-semibold text-indigo-600 hover:text-indigo-500">
+                    Forgot password?
+                  </Link>
+                </div>
+              </div>
+              <div className="mt-2 ">
+                <input
+                  id="password"
+                  value={password}
+                  name="password"
+                  type="password"
+                  autoComplete="current-password"
+                  required
+                  onChange={(e)=>{
+                    setPassword(e.target.value)
+                  }}
+                  className="block px-3 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+
+            <div>
+              <button
+                onClick={LoginRequest}
+                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 btn btn-warning"
+              >
+                {spin? <div>Sign in</div> :<span className="loading loading-spinner loading-md"></span>}
+              </button>
+            </div>
+          </div>
+
+          <p className="mt-10 text-center text-sm text-gray-500">
+            Not a member?{' '}
+            <Link to="/user/register" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+              Signup with us
+            </Link>
+          </p>
+        </div>
+      </div>
+  
+
         </div>
     )
 }

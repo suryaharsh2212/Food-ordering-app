@@ -155,7 +155,7 @@ const Register = () => {
     return (
         <div className=' px-5 h-screen md:mt-32 border-slate-100 '>
             {alert ?
-                <div role="alert" className="alert alert-error absolute top-24 left-1/2 transform -translate-x-1/2 ">
+                <div role="alert" className="alert alert-error absolute top-24 left-1/2 transform -translate-x-1/2 z-50 ">
 
                     <span>{message}</span>
                     <button onClick={() => { setAlert(false) }} className='flex justify-end'>
@@ -167,8 +167,8 @@ const Register = () => {
             }
 
             {check ?
-                <div className='w-full h-screen flex justify-center items-center bg-white shadow-xl'>
-                    <h1 className=' text-center'>SIgN</h1>
+                <div className='w-full h-screen flex justify-center items-center -mt-20  shadow-xl'>
+                    <h1 className=' text-center'></h1>
 
                     <div className="relative flex min-h-screen flex-col justify-center w-screen bg-gray-50">
                         <div className="relative bg-white px-6 pt-10 pb-9 shadow-xl mx-auto w-full max-w-lg border-black rounded">

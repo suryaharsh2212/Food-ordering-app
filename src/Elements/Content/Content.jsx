@@ -24,7 +24,8 @@ function Content() {
         const data = await response.json();
 
         setRestro(data.data.dataList);
-        console.log(data.data.dataList); // Make sure to use data from the response, not state
+        console.log(data.data.dataList); 
+         console.log(data.data);
       } catch (error) {
         console.log(error);
       }
@@ -41,7 +42,7 @@ function Content() {
             <SearchBar />
           </div>
         </div>
-        <div className="container mx-auto -mt-96 md:-mt-20 md:p-5  grid grid-cols-1 gap-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 row-span-9">
+        <div className="container mx-auto -mt-96 md:-mt-20 md:p-10  grid grid-cols-1 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 row-span-9">
           {restro.map((item) => (
             <ProductCard
               key={item.name} // Don't forget to add a unique key

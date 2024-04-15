@@ -2,6 +2,7 @@ import { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
+import { useGlobalState } from '../../Globalstate'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -10,6 +11,9 @@ function classNames(...classes) {
 export default function Account() {
     const navigate=useNavigate()
     const [alert,setAlert]=useState(false)
+    const {dispatch}=useGlobalState()
+    const {state}=useGlobalState()
+    console.log(state.email)
     const logout=async()=>{
     
         try {
@@ -27,6 +31,7 @@ export default function Account() {
                     setAlert(true)
                     console.log(res.message );
                 }else{
+                  dispatch({ type: 'LOGOUT' })
                     navigate("/")
                 }
                
@@ -92,7 +97,7 @@ export default function Account() {
                     'block px-4 py-2 text-sm'
                   )}
                 >
-                  License
+                  {state.email}
                 </a>
               )}
             </Menu.Item>

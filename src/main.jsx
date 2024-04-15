@@ -12,6 +12,8 @@ import Content from './Elements/Content/Content.jsx'
 import ForgotPassword from './Elements/Authentication/ForgotPassword.jsx'
 import Userforgotpassword from './Elements/Authentication/Userforgotpassword.jsx'
 import Userprofile from './Elements/Header/Userprofile.jsx'
+import { GlobalStateProvider } from './Globalstate.jsx' 
+import RestaurantMenu from './Elements/Content/RestaurantMenu.jsx'
 
 
 
@@ -28,6 +30,8 @@ const router=createBrowserRouter(
       <Route path='/request/forgot-password' element={<ForgotPassword/>}/>
       <Route path='/password/forgot-password' element={<Userforgotpassword/>}/>
       <Route path='/user/profile' element={<Userprofile/>}/>
+      <Route path='/restaurant-menu/:restaurantId' element={<RestaurantMenu />} />
+
       
     </Route>
   )
@@ -35,6 +39,11 @@ const router=createBrowserRouter(
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-   <RouterProvider  router={router}/>
+    <GlobalStateProvider>
+    
+    <RouterProvider  router={router}/>
+    </GlobalStateProvider>
+    
+   
   </React.StrictMode>,
 )

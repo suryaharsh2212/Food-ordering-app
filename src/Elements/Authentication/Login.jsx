@@ -1,6 +1,8 @@
 import  { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
+import { useGlobalState } from '../../Globalstate' 
+import Cookies from 'js-cookie';
 
 function Login() {
     const navigate=useNavigate()
@@ -9,7 +11,7 @@ function Login() {
     const [message,setmessage]=useState('')
     const [alert,setAlert]=useState(false)
     const [spin,setSpin]=useState(true)
-  
+    const { dispatch } = useGlobalState();
         const LoginRequest=async()=>{
             try {
                 setSpin(false)
@@ -18,21 +20,18 @@ function Login() {
                     credentials: 'include',
                     headers: {
                       'Content-Type': 'application/json',
-                     
                     },
                     body: JSON.stringify({email,password}),
                 });
                 response.json().then((res)=>{
-                    console.log(res);
-                
-                    console.log(document.cookie);
                     if (res.hasError) {
                         setSpin(true)
-                        console.log(res.message );
                         setmessage(res.message)
-
                         setAlert(true)
                     }else{
+                      console.log("access token",Cookies.get("access_token"));
+                       dispatch({ type: 'LOGIN' })
+                       dispatch({ type: 'UPDATE_EMAIL', payload: res.email });
                         navigate("/user/content")
                         setSpin(false)
                     }

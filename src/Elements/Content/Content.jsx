@@ -1,12 +1,15 @@
 import { Link } from "react-router-dom"
 import ProductCard from "./ProductCard"
 import SearchBar from "./SearchBar"
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react" 
+import { useId } from "react"
 
 function Content() {
   const [restro, setRestro] = useState([])
   const [pageNo, setpageNo] = useState(1)
   const [pageSize, setPagesize] = useState(12)
+  const [resturantId,setRestuarnatId]=useState()
+  const uid=useId()
   const handleNextPage = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -24,6 +27,7 @@ function Content() {
         const data = await response.json();
 
         setRestro(data.data.dataList);
+
         console.log(data.data.dataList); 
          console.log(data.data);
       } catch (error) {
@@ -45,12 +49,14 @@ function Content() {
         <div className="container mx-auto -mt-96 md:-mt-20 md:p-10  grid grid-cols-1 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 row-span-9">
           {restro.map((item) => (
             <ProductCard
-              key={item.name} // Don't forget to add a unique key
+              key={uid} // Don't forget to add a unique key
               name={item.name}
               cusine={item.cusine}
               price={item.price}
               rating={item.rating}
               image={item.bannerURL}
+              restaurantId={item._id}
+              
             />
           ))}
 

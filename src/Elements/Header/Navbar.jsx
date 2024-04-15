@@ -3,8 +3,13 @@ import { Link, useNavigate } from 'react-router-dom'
 import Account from './Account'
 import { Button } from '@material-tailwind/react'
 import Cart from '../Cart/Cart'
+import { useGlobalState } from '../../Globalstate'  
 function Navbar() {
   const navigate=useNavigate()
+  const { state } = useGlobalState();
+  
+  
+  // console.log(state);
   const [alert,setAlert]=useState(false)
   
 
@@ -47,9 +52,10 @@ function Navbar() {
         </div>
         <div className="navbar-end">
           <div>
-            <Account/>
-            
-
+            {state.loggedIn?<><Account  /></>:
+            <div className="tooltip tooltip-bottom overflow-visible z-50" data-tip="Login to see your Account">
+            <img className='h-8 w-8 mr-6 mt-2' src="https://cdn-icons-png.flaticon.com/128/10307/10307911.png" alt="" />
+          </div>}
           </div>
           <Link to="/user/cart"><img className='h-10 w-10' src="https://cdn-icons-png.flaticon.com/128/4290/4290854.png" alt="" /> </Link>
         </div>

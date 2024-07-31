@@ -8,7 +8,7 @@ import Hero from './Hero'
 
 function Home() {
     return (
-        <div className='md:p-5 md:mt-20'style={{backgroundImage:"linear-gradient(#b3f2ff,#ffff)"}} >
+        <div className='md:p-5 md:mt-20'style={{backgroundImage:"linear-gradient()"}} >
              
             <Section/>
              <Carousel/>
@@ -22,6 +22,7 @@ function Home() {
 }
 
 export default Home
+
 
 
 

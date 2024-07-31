@@ -11,7 +11,7 @@ const Carousel = () => {
         <p className="text-base md:text-lg text-slate-700 my-4 md:my-6">
         From cozy local eateries to popular chains, Just Eat offers a diverse selection of restaurants to cater to every taste bud. Whether you're in the mood for classic comfort food, exotic cuisine, or healthy options, the app's extensive database ensures that you'll find something to satisfy your cravings.
 
-3. Real-Time 
+
         </p>
       
       </div>

@@ -9,13 +9,13 @@ export const Section = () => {
             viewBox="0 0 100 100"
             fill="currentColor"
             preserveAspectRatio="none slice"
-          >
-            {/* <path d="M50 0H100L50 100H0L50 0Z" />  */}
+                >
+            
           </svg>
           <img
             className="object-cover w-full h-56 rounded shadow-lg lg:rounded-none lg:shadow-none md:h-96 lg:h-full "
-            src="https://cdn.discordapp.com/attachments/792757818217988157/1222952419969990696/high-res.png?ex=66181632&is=6605a132&hm=a319112700734b1433ace274b11781f3f82854d35344a69e0c009e5eb5422c0c&"
-            alt=""
+            src="https://res.cloudinary.com/dllgqcla4/image/upload/v1722408337/food-removebg-preview_pnalnm.png" 
+            alt="kuhnh"
           />
         </div>
         <div className="relative flex flex-col items-start w-full max-w-xl px-4 mx-auto md:px-0 lg:px-8 lg:max-w-screen-xl">
@@ -33,13 +33,6 @@ export const Section = () => {
             </h2>
             <p className="pr-5 mb-5 text-base text-gray-700 md:text-lg">
             Whether craving pizza, sushi, or curry, Just Eat ensures that satisfying meals are just a few taps away, making it the go-to choice for food lovers seeking convenience and variety.
-
-
-
-
-
-
-
             </p>
             <div className="flex items-center">
               <Link
@@ -47,7 +40,6 @@ export const Section = () => {
                 className="inline-flex items-center justify-center h-12 px-6 mr-6 font-medium tracking-wide text-black transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none bg-orange-500"  >
                 <button className="">Get started</button>
               </Link>
-              
             </div>
           </div>
         </div>

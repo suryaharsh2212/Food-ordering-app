@@ -13,9 +13,9 @@ export const Section = () => {
             
           </svg>
           <img
-            className="object-cover w-full h-56 rounded shadow-lg lg:rounded-none lg:shadow-none md:h-96 lg:h-full "
-            src="https://res.cloudinary.com/dllgqcla4/image/upload/v1722408337/food-removebg-preview_pnalnm.png" 
-            alt="kuhnh"
+            className="object-cover w-full  rounded shadow-lg lg:rounded-none lg:shadow-none md:h-96 lg:h-full "
+            src="https://res.cloudinary.com/dllgqcla4/image/upload/v1722409241/medium-shot-cartoonish-boy-with-burger-removebg_ixpqcy.png" 
+            alt="Failed to Load"
           />
         </div>
         <div className="relative flex flex-col items-start w-full max-w-xl px-4 mx-auto md:px-0 lg:px-8 lg:max-w-screen-xl">
